@@ -4,48 +4,91 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PG_Ausweisgen"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="PG Ausweisgenerator" Height="450" Width="800" Background="Black" Closing="Window_Closing">
+        Title="PG Ausweisgenerator" Height="410" Width="500" Closing="Window_Closing" Background="Black">
     <Window.Resources>
         <local:Settings x:Key="Settings"/>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="Margin" Value="3" />
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="Background" Value="DarkGray" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Margin" Value="3" />
         </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+        <Style TargetType="DatePickerTextBox">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="100" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-        </Grid.RowDefinitions>
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
 
-        <Label Content="Inkscape-Pfad:" Grid.Row="0" Grid.Column="0" />
-        <TextBox Name="tbInkscape" Text="{Binding Mode=TwoWay, Path=InkscapePath, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1"/>
-        <Button Name="btInkscape" Content="Search" Grid.Row="0" Grid.Column="2" Click="btInkscape_Click"   />
+            <Label Content="Inkscape-Pfad:" Grid.Row="0" Grid.Column="0" />
+            <TextBox x:Name="tbInkscape" Text="{Binding InkscapePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1"/>
+            <Button x:Name="btInkscape" Content="Durchsuchen" Grid.Row="0" Grid.Column="2" Click="btInkscape_Click" />
 
-        <Label Content="SVG Vorderseite:" Grid.Row="1" Grid.Column="0" />
-        <TextBox Name="tbFront" Text="{Binding  Mode=TwoWay, Path=InputFileFront, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1"/>
-        <Button Name="btFront" Content="Search" Grid.Row="1" Grid.Column="2" Click="btFront_Click"   />
+            <Label Content="SVG Vorderseite:" Grid.Row="1" Grid.Column="0" />
+            <TextBox x:Name="tbFront" Text="{Binding InputFileFront, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+            <Button x:Name="btFront" Content="Durchsuchen" Grid.Row="1" Grid.Column="2" Click="btFront_Click" />
 
-        <Label Content="SVG Rückseite:" Grid.Row="2" Grid.Column="0" />
-        <TextBox Name="tbBack" Text="{Binding  Mode=TwoWay, Path=InputFileBack, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1"/>
-        <Button Name="btBack" Content="Search" Grid.Row="2" Grid.Column="2" Click="btBack_Click"   />
+            <Label Content="SVG Rückseite:" Grid.Row="2" Grid.Column="0" />
+            <TextBox x:Name="tbBack" Text="{Binding InputFileBack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"/>
+            <Button x:Name="btBack" Content="Durchsuchen" Grid.Row="2" Grid.Column="2" Click="btBack_Click" />
 
-        <Label Content="Ausgabeformate:" Grid.Row="3" Grid.Column="0" />
-        <TextBox Name="tbOut" Text="{Binding Mode=TwoWay, Path=OutputFileFormats, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1"/>
-    </Grid>
+            <Label Content="Ausgabeverzeichnis:" Grid.Row="3" Grid.Column="0" />
+            <TextBox x:Name="tbOutDir" Text="{Binding OutputDir, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"/>
+            <Button x:Name="btOutDir" Content="Durchsuchen" Grid.Row="3" Grid.Column="2" Click="btOutDir_Click" />
+
+            <Label Content="Ausgabeformate:" Grid.Row="4" Grid.Column="0" />
+            <TextBox x:Name="tbOutFormat" Text="{Binding OutputFileFormats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1"/>
+
+            <Label Content="Mitgliedsdaten" Grid.Row="5" Grid.Column="0" />
+
+            <Label Content="Vorname:" Grid.Row="6" Grid.Column="0" />
+            <TextBox x:Name="tbFirstName" Grid.Row="6" Grid.Column="1"/>
+
+            <Label Content="Nachname:" Grid.Row="7" Grid.Column="0" />
+            <TextBox x:Name="tbLastName" Grid.Row="7" Grid.Column="1"/>
+
+            <Label Content="Mitgliedsnummer:" Grid.Row="8" Grid.Column="0" />
+            <TextBox x:Name="tbMemberNo" Grid.Row="8" Grid.Column="1"/>
+
+            <Label Content="Beitrittsdatum:" Grid.Row="9" Grid.Column="0" />
+            <DatePicker x:Name="tbEntryDate" SelectedDate="{x:Static sys:DateTime.Now}" Grid.Row="9" Grid.Column="1" />
+
+            <Button x:Name="btCreate" Content="Erstellen" Grid.Row="10" Grid.Column="0" Click="btCreate_Click" />
+        </Grid>
+        <Label Content="Packers Germany Mitgliedsausweis-Generator 1.0, von Gobou/Gerald Siegert" DockPanel.Dock="Bottom" VerticalContentAlignment="Bottom" />
+    </DockPanel>
 
 </Window>

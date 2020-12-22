@@ -24,7 +24,8 @@ namespace PG_Ausweisgen
         private string _InkscapePath = @"C:\Program Files\Inkscape";
         private string _InputFileFront;
         private string _InputFileBack;
-        private string _OutputFileFormats;
+        private string _OutputFileFormats = "png";
+        private string _OutputDir;
 
         /// <summary>
         /// Path to inkscape installation directory, default C:\Program Files\Inkscape
@@ -74,6 +75,19 @@ namespace PG_Ausweisgen
             set
             {
                 _OutputFileFormats = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Output directory
+        /// </summary>
+        public string OutputDir
+        {
+            get => _OutputDir;
+            set
+            {
+                _OutputDir = value;
                 NotifyPropertyChanged();
             }
         }

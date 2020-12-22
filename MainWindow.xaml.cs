@@ -71,5 +71,21 @@ namespace PG_Ausweisgen
             if(dialog.ShowDialog() == true)
                 Settings.Instance.InputFileBack = dialog.FileName;
         }
+
+        private void btOutDir_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonOpenFileDialog()
+            {
+                IsFolderPicker = true,
+                DefaultDirectory = Settings.Instance.InkscapePath
+            };
+            if(dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                Settings.Instance.OutputDir = dialog.FileName;
+        }
+
+        private void btCreate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
