@@ -5,6 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PG_Ausweisgen"
         mc:Ignorable="d"
-        Title="PG Ausweisgenerator" Height="450" Width="800" Background="Black">
+        Title="PG Ausweisgenerator" Height="450" Width="800" Background="Black" Closing="Window_Closing">
+    <Window.Resources>
+        <local:Settings x:Key="Settings"/>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="DarkGray" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Inkscape-Pfad:" Grid.Row="0" Grid.Column="0" />
+        <TextBox Name="tbInkscape" Text="{Binding Mode=TwoWay, Path=InkscapePath, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1"/>
+        <Button Name="btInkscape" Content="Search" Grid.Row="0" Grid.Column="2" Click="btInkscape_Click"   />
+
+        <Label Content="SVG Vorderseite:" Grid.Row="1" Grid.Column="0" />
+        <TextBox Name="tbFront" Text="{Binding  Mode=TwoWay, Path=InputFileFront, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1"/>
+        <Button Name="btFront" Content="Search" Grid.Row="1" Grid.Column="2" Click="btFront_Click"   />
+
+        <Label Content="SVG Rückseite:" Grid.Row="2" Grid.Column="0" />
+        <TextBox Name="tbBack" Text="{Binding  Mode=TwoWay, Path=InputFileBack, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1"/>
+        <Button Name="btBack" Content="Search" Grid.Row="2" Grid.Column="2" Click="btBack_Click"   />
+
+        <Label Content="Ausgabeformate:" Grid.Row="3" Grid.Column="0" />
+        <TextBox Name="tbOut" Text="{Binding Mode=TwoWay, Path=OutputFileFormats, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1"/>
+    </Grid>
 
 </Window>
