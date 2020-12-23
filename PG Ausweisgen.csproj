@@ -1,15 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>PG_Ausweisgen</RootNamespace>
     <UseWPF>true</UseWPF>
+    <StartupObject>PG_Ausweisgen.App</StartupObject>
+    <PackageId>PG-AusweisGen</PackageId>
+    <Authors>Gerald Siegert</Authors>
+    <Company>Packers Germany</Company>
+    <Product>Packers Germany Ausweisgenerator</Product>
+    <Description>Ausweisgenerator für den Verein Packers Germany</Description>
+    <RepositoryUrl>https://github.com/gobo7793/PG-Ausweisgen</RepositoryUrl>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Logo_Symbol.png" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />

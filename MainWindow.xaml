@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Icon = "pack://application:,,,/Logo_Symbol.png"
-        Title="PG Ausweisgenerator" Height="410" Width="500" Closing="Window_Closing" Background="Black">
+        Title="Packers Germany Ausweisgenerator" Height="410" Width="500" Closing="Window_Closing" Background="Black">
     <Window.Resources>
         <local:Settings x:Key="Settings"/>
         <Style TargetType="Label">
