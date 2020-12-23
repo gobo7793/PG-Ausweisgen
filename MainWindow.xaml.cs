@@ -28,7 +28,7 @@ namespace PG_Ausweisgen
 
             if(!Settings.Deserialize())
                 MessageBox.Show("Fehler beim Laden der Einstellungen. Bitte Pfade erneut eingeben!",
-                    "Fehler beim Laden der Einstellungen", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Fehler beim Laden der Einstellungen", MessageBoxButton.OK, MessageBoxImage.Information);
 
             DataContext = Settings.Instance;
         }

@@ -17,6 +17,7 @@
         <Style TargetType="TextBox">
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Background" Value="Transparent" />
+            <Setter Property="CaretBrush" Value="White" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Margin" Value="3" />
         </Style>
@@ -29,6 +30,7 @@
         <Style TargetType="DatePickerTextBox">
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Background" Value="Transparent" />
+            <Setter Property="CaretBrush" Value="White" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </Window.Resources>
@@ -88,7 +90,7 @@
 
             <Button x:Name="btCreate" Content="Erstellen" Grid.Row="10" Grid.Column="0" Click="BtCreate_Click" />
         </Grid>
-        <Label Content="Packers Germany Mitgliedsausweis-Generator 1.0, von Gobou/Gerald Siegert" DockPanel.Dock="Bottom" VerticalContentAlignment="Bottom" />
+        <Label Content="Packers Germany Mitgliedsausweis-Generator 1.0, von Gerald Siegert" DockPanel.Dock="Bottom" VerticalContentAlignment="Bottom" />
     </DockPanel>
 
 </Window>

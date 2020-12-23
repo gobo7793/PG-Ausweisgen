@@ -32,6 +32,11 @@ namespace PG_Ausweisgen
         private string _OutputFileNameBack = "hinten";
         private string _OutputDir;
 
+        private string _FirstNameWildcard = "%FIRSTNAME";
+        private string _LastNameWildcard = "%LASTNAME";
+        private string _MemberNumberWildcard = "%NUMBER";
+        private string _EntryDateWildcard = "%DATE";
+
         /// <summary>
         /// Path to inkscape installation directory, default C:\Program Files\Inkscape
         /// </summary>
@@ -170,13 +175,69 @@ namespace PG_Ausweisgen
         }
 
         /// <summary>
+        /// First name wildcard in SVG file
+        /// </summary>
+        public string FirstNameWildcard
+        {
+            get => _FirstNameWildcard;
+            set
+            {
+                _FirstNameWildcard = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Last name wildcard in SVG file
+        /// </summary>
+        public string LastNameWildcard
+        {
+            get => _LastNameWildcard;
+            set
+            {
+                _LastNameWildcard = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Member number wildcard in SVG file
+        /// </summary>
+        public string MemberNumberWildcard
+        {
+            get => _MemberNumberWildcard;
+            set
+            {
+                _MemberNumberWildcard = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Entry date wildcard in SVG file
+        /// </summary>
+        public string EntryDateWildcard
+        {
+            get => _EntryDateWildcard;
+            set
+            {
+                _EntryDateWildcard = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
         /// Saves the settings to <see cref="_SettingsFile"/>
         /// </summary>
         public static bool Serialize()
         {
             try
             {
-                var json = JsonSerializer.Serialize(Instance);
+                var jsonOptions = new JsonSerializerOptions()
+                {
+                    WriteIndented = true,
+                };
+                var json = JsonSerializer.Serialize(Instance, jsonOptions);
                 File.WriteAllText(_SettingsFile, json);
             }
             catch

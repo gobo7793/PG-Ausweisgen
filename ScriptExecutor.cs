@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -24,27 +25,58 @@ namespace PG_Ausweisgen
             if(!InkscapeExe.Exists)
                 throw new FileNotFoundException("Inkscape file not found: " + InkscapeExe.FullName);
 
-            var cmds = BuildCmdLine(firstName, lastName, memberNo);
+            var frontTempFile = new FileInfo(String.Format(@"{0}\{1}", Environment.CurrentDirectory, "tempFront.svg"));
+            BuildFrontPage(frontTempFile.FullName, firstName, lastName, memberNo, entryDate);
+
+            var cmdOptions = BuildCmdLineOptions(firstName, lastName, memberNo, frontTempFile.FullName);
+
+            var frontPorcess = Process.Start(InkscapeExe.FullName, cmdOptions.Item1);
+            var backProcess = Process.Start(InkscapeExe.FullName, cmdOptions.Item2);
+
+            frontPorcess.WaitForExit();
+            backProcess.WaitForExit();
+
+            if(frontTempFile.Exists)
+                frontTempFile.Delete();
 
             return true;
         }
 
-        private static (string, string) BuildCmdLine(string firstName, string lastName, string memberNo)
+        /// <summary>
+        /// Builds the front SVG and saves it to given file name
+        /// </summary>
+        private static void BuildFrontPage(string frontTempFile, string firstName, string lastName, string memberNo, DateTime entryDate)
+        {
+            var svg = new StringBuilder(File.ReadAllText(Settings.Instance.InputFileFront));
+
+            svg.Replace(Settings.Instance.FirstNameWildcard, firstName);
+            svg.Replace(Settings.Instance.LastNameWildcard, lastName);
+            svg.Replace(Settings.Instance.MemberNumberWildcard, memberNo);
+            svg.Replace(Settings.Instance.EntryDateWildcard, entryDate.ToString("d"));
+
+            File.WriteAllText(frontTempFile, svg.ToString());
+        }
+
+        /// <summary>
+        /// Builds the command line options to generate the final files from SVG
+        /// </summary>
+        /// <returns>The cmd line options for front and back page</returns>
+        private static (string, string) BuildCmdLineOptions(string firstName, string lastName, string memberNo, string inputFileFront)
         {
             var outFileFront = String.Format(Settings.Instance.OutputFileName,
                 memberNo, firstName, lastName, Settings.Instance.OutputFileNameFront);
             var outFileBack = String.Format(Settings.Instance.OutputFileName,
                 memberNo, firstName, lastName, Settings.Instance.OutputFileNameBack);
 
+            var outFullFileFront = String.Format(@"{0}\{1}", Settings.Instance.OutputDir, outFileFront);
+            var outFullFileBack = String.Format(@"{0}\{1}", Settings.Instance.OutputDir, outFileBack);
+
             var cmdLineOptionsFront = String.Format(Settings.Instance.InkscapeOptions,
-                Settings.Instance.OutputFileFormats, outFileFront, Settings.Instance.InputFileFront);
+                Settings.Instance.OutputFileFormats, outFullFileFront, inputFileFront);
             var cmdLineOptionsBack = String.Format(Settings.Instance.InkscapeOptions,
-                Settings.Instance.OutputFileFormats, outFileFront, Settings.Instance.InputFileBack);
+                Settings.Instance.OutputFileFormats, outFullFileBack, Settings.Instance.InputFileBack);
 
-            var executionCmdFront = String.Format("\"{0}\" {1} ", InkscapeExe.FullName, cmdLineOptionsFront);
-            var executionCmdBack = String.Format("\"{0}\" {1} ", InkscapeExe.FullName, cmdLineOptionsBack);
-
-            return (executionCmdFront, executionCmdBack);
+            return (cmdLineOptionsFront, cmdLineOptionsBack);
         }
     }
 }
