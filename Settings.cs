@@ -23,9 +23,13 @@ namespace PG_Ausweisgen
 
         private string _InkscapePath = @"C:\Program Files\Inkscape";
         private string _InkscapeExe = @"bin\inkscape.com";
+        private string _InkscapeOptions = "--export-type={0} -o \"{1}\" \"{2}\"";
         private string _InputFileFront;
         private string _InputFileBack;
         private string _OutputFileFormats = "png";
+        private string _OutputFileName = "Mitgliedsausweis_{0}_{1}_{2}_{3}";
+        private string _OutputFileNameFront = "vorne";
+        private string _OutputFileNameBack = "hinten";
         private string _OutputDir;
 
         /// <summary>
@@ -50,6 +54,22 @@ namespace PG_Ausweisgen
             set
             {
                 _InkscapeExe = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// The Inkscape command line options
+        /// {0} = <see cref="OutputFileFormats"/>
+        /// {1} = <see cref="OutputFileName"/>
+        /// {2} = Input file name
+        /// </summary>
+        public string InkscapeOptions
+        {
+            get => _InkscapeOptions;
+            set
+            {
+                _InkscapeOptions = value;
                 NotifyPropertyChanged();
             }
         }
@@ -89,6 +109,49 @@ namespace PG_Ausweisgen
             set
             {
                 _OutputFileFormats = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Output file name, without file extension.
+        /// {0} = Member Number
+        /// {1} = First Name
+        /// {2} = Last Name
+        /// {3} = Front/Back Page
+        /// </summary>
+        public string OutputFileName
+        {
+            get => _OutputFileName;
+            set
+            {
+                _OutputFileName = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Front page file name indicator
+        /// </summary>
+        public string OutputFileNameFront
+        {
+            get => _OutputFileNameFront;
+            set
+            {
+                _OutputFileNameFront = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Back page file name indicator
+        /// </summary>
+        public string OutputFileNameBack
+        {
+            get => _OutputFileNameBack;
+            set
+            {
+                _OutputFileNameBack = value;
                 NotifyPropertyChanged();
             }
         }
