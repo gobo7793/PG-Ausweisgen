@@ -42,7 +42,7 @@ namespace PG_Ausweisgen
             }
         }
 
-        private void btInkscape_Click(object sender, RoutedEventArgs e)
+        private void BtInkscape_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new CommonOpenFileDialog()
             {
@@ -53,7 +53,7 @@ namespace PG_Ausweisgen
                 Settings.Instance.InkscapePath = dialog.FileName;
         }
 
-        private void btFront_Click(object sender, RoutedEventArgs e)
+        private void BtFront_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog(){
                 Filter = "SVG-Dateien (*.svg)|*.svg"
@@ -62,7 +62,7 @@ namespace PG_Ausweisgen
                 Settings.Instance.InputFileFront = dialog.FileName;
         }
 
-        private void btBack_Click(object sender, RoutedEventArgs e)
+        private void BtBack_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog()
             {
@@ -72,7 +72,7 @@ namespace PG_Ausweisgen
                 Settings.Instance.InputFileBack = dialog.FileName;
         }
 
-        private void btOutDir_Click(object sender, RoutedEventArgs e)
+        private void BtOutDir_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new CommonOpenFileDialog()
             {
@@ -83,9 +83,16 @@ namespace PG_Ausweisgen
                 Settings.Instance.OutputDir = dialog.FileName;
         }
 
-        private void btCreate_Click(object sender, RoutedEventArgs e)
+        private void BtCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                ScriptExecutor.ExecuteInkscape(tbFirstName.Text, tbLastName.Text, tbMemberNo.Text, tbEntryDate.DisplayDate);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler bei der Ausführung", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

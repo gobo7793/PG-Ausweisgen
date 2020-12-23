@@ -22,6 +22,7 @@ namespace PG_Ausweisgen
         private const string _SettingsFile = "settings.json";
 
         private string _InkscapePath = @"C:\Program Files\Inkscape";
+        private string _InkscapeExe = @"bin\inkscape.com";
         private string _InputFileFront;
         private string _InputFileBack;
         private string _OutputFileFormats = "png";
@@ -36,6 +37,19 @@ namespace PG_Ausweisgen
             set
             {
                 _InkscapePath = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// The Inkscape exe for command line, default bin\inkscape.com
+        /// </summary>
+        public string InkscapeExe
+        {
+            get => _InkscapeExe;
+            set
+            {
+                _InkscapeExe = value;
                 NotifyPropertyChanged();
             }
         }
