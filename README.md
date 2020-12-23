@@ -4,6 +4,7 @@ Ausweisgenerator für den Verein Packers Germany
 ### Installation:
 
 Benötigt:
+- .NET 5.0 (zum Prüfen Eingabeaufforderung öffnen und `dotnet --version` eingeben)
 - Inkscape
 - Alle Schriftarten, die in den Eingabe-SVG-Dateien definiert sind
 
