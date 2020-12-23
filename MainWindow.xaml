@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PG_Ausweisgen"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Icon = "pack://application:,,,/Logo_Symbol.png"
         Title="Packers Germany Ausweisgenerator" Height="410" Width="500" Closing="Window_Closing" Background="Black">
@@ -20,6 +21,13 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="CaretBrush" Value="White" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+        <Style TargetType="xctk:IntegerUpDown">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="Margin" Value="3" />
         </Style>
         <Style TargetType="DatePicker">
@@ -84,7 +92,7 @@
             <TextBox x:Name="tbLastName" Grid.Row="7" Grid.Column="1"/>
 
             <Label Content="Mitgliedsnummer:" Grid.Row="8" Grid.Column="0" />
-            <TextBox x:Name="tbMemberNo" Grid.Row="8" Grid.Column="1"/>
+            <xctk:IntegerUpDown x:Name="tbMemberNo" Grid.Row="8" Grid.Column="1"/>
 
             <Label Content="Beitrittsdatum:" Grid.Row="9" Grid.Column="0" />
             <DatePicker x:Name="tbEntryDate" SelectedDate="{x:Static sys:DateTime.Now}" Grid.Row="9" Grid.Column="1" />
