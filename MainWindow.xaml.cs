@@ -88,7 +88,7 @@ namespace PG_Ausweisgen
         {
             try
             {
-                ScriptExecutor.ExecuteInkscape(tbFirstName.Text, tbLastName.Text, tbMemberNo.Text, tbEntryDate.DisplayDate);
+                ScriptExecutor.ExecuteInkscape(tbFirstName.Text, tbLastName.Text, tbMemberNo.Text, tbEntryDate.Text);
             }
             catch(Exception ex)
             {

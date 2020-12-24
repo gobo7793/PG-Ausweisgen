@@ -20,7 +20,7 @@ namespace PG_Ausweisgen
         /// <param name="memberNo">Membership number of the Member</param>
         /// <param name="entryDate">Entry date of the Member</param>
         /// <returns>True if no Exceptions occured, otherwise the Exception</returns>
-        public static bool ExecuteInkscape(string firstName, string lastName, string memberNo, DateTime entryDate)
+        public static bool ExecuteInkscape(string firstName, string lastName, string memberNo, string entryDate)
         {
             if(!InkscapeExe.Exists)
                 throw new FileNotFoundException("Inkscape file not found: " + InkscapeExe.FullName);
@@ -45,14 +45,14 @@ namespace PG_Ausweisgen
         /// <summary>
         /// Builds the front SVG and saves it to given file name
         /// </summary>
-        private static void BuildFrontPage(string frontTempFile, string firstName, string lastName, string memberNo, DateTime entryDate)
+        private static void BuildFrontPage(string frontTempFile, string firstName, string lastName, string memberNo, string entryDate)
         {
             var svg = new StringBuilder(File.ReadAllText(Settings.Instance.InputFileFront));
 
             svg.Replace(Settings.Instance.FirstNameWildcard, firstName);
             svg.Replace(Settings.Instance.LastNameWildcard, lastName);
             svg.Replace(Settings.Instance.MemberNumberWildcard, memberNo);
-            svg.Replace(Settings.Instance.EntryDateWildcard, entryDate.ToString("d"));
+            svg.Replace(Settings.Instance.EntryDateWildcard, entryDate);
 
             File.WriteAllText(frontTempFile, svg.ToString());
         }
