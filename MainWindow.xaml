@@ -99,7 +99,7 @@
 
             <Button x:Name="btCreate" Content="Erstellen" Grid.Row="10" Grid.Column="0" Click="BtCreate_Click" />
         </Grid>
-        <Label Content="Packers Germany Mitgliedsausweis-Generator 1.1, von Gerald Siegert" DockPanel.Dock="Bottom" VerticalContentAlignment="Bottom" />
+        <Label Content="Packers Germany Mitgliedsausweis-Generator 1.2, von Gerald Siegert" DockPanel.Dock="Bottom" VerticalContentAlignment="Bottom" />
     </DockPanel>
 
 </Window>

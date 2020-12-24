@@ -12,9 +12,9 @@
     <Product>Packers Germany Ausweisgenerator</Product>
     <Description>Ausweisgenerator für den Verein Packers Germany</Description>
     <RepositoryUrl>https://github.com/gobo7793/PG-Ausweisgen</RepositoryUrl>
-    <Version>1.1</Version>
-    <FileVersion>1.1</FileVersion>
-    <AssemblyVersion>1.1</AssemblyVersion>
+    <Version>1.2</Version>
+    <FileVersion>1.2</FileVersion>
+    <AssemblyVersion>1.2</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
